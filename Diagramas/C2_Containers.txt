@@ -1,0 +1,26 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Sistema Biblioteca Personal - Diagrama de Contenedores
+
+Person(usuario, "Usuario", "Lector de libros")
+
+System_Boundary(alexa_platform, "Amazon Alexa Platform") {
+    Container(vui, "Voice User Interface", "Alexa Voice Service", "Procesa comandos de voz del usuario y sintetiza respuestas de audio")
+    Container(ask, "Alexa Skills Kit", "ASK Runtime", "Convierte voz a JSON, maneja intents, slots y sesiones")
+}
+
+System_Boundary(aws_cloud, "AWS Cloud") {
+    Container(lambda_function, "Alexa Skill Lambda", "Python 3.9", "Contiene los handlers de intents y la lógica de negocio POO")
+    ContainerDb(memory_storage, "S3", "JSON Objects", "Almacenamiento temporal de la biblioteca durante la sesión")
+}
+
+Rel(usuario, vui, "Comandos de voz", "Audio")
+Rel(vui, ask, "Procesamiento de audio", "Alexa Voice Service")
+Rel(ask, lambda_function, "JSON Request", "HTTPS")
+Rel(lambda_function, ask, "JSON Response", "HTTPS")
+Rel(ask, vui, "Síntesis de voz", "Alexa Voice Service")
+Rel(vui, usuario, "Respuestas de audio", "Audio")
+
+Rel(lambda_function, memory_storage, "CRUD Operations", "Python objects")
+@enduml

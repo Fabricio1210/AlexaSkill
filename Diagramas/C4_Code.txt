@@ -1,0 +1,61 @@
+@startuml
+title Diagrama de Clases C4 - Nivel 4: Componentes Internos
+skinparam classAttributeIconSize 0
+
+class DatabaseManager{
+  + get_user_data(handler_input) : dict
+  + save_user_data(handler_input, data)
+}
+
+class Libro{
+  + id : str
+  + titulo : str
+  + autor : str
+  + estado : str
+  + total_prestamos : int
+  --
+  + to_dict() : dict
+}
+
+class Prestamo{
+  + id : str
+  + libro_id : str
+  + persona : str
+  + fecha_prestamo : str
+  + fecha_limite : str
+  --
+  + to_dict() : dict
+  + fue_devuelto_a_tiempo() : bool
+}
+
+class BibliotecaService{
+  -- Métodos de Mutación --
+  + agregar_libro(...)
+  + eliminar_libro(titulo)
+  + registrar_prestamo(...)
+  + registrar_devolucion(...)
+  
+  -- Métodos de Lectura y Análisis --
+  + buscar_libros(titulo)
+  + obtener_resumen_prestamos()
+  + obtener_resumen_historial()
+  + obtener_pagina_libros(...)
+}
+
+class IntentHandler{
+  + can_handle(input) : bool
+  + handle(input) : Response
+  -- Flujos Comunes --
+  - get_slot_value(input, name)
+  - response_builder : object
+}
+
+
+' RELACIONES
+
+BibliotecaService ..> DatabaseManager : Persistencia
+BibliotecaService ..> Libro : Crea, consulta y elimina
+BibliotecaService ..> Prestamo : Crea y finaliza el ciclo
+Prestamo --> Libro : Asociado por {libro_id}
+IntentHandler .up.> BibliotecaService : Llama a los métodos de servicio
+@enduml

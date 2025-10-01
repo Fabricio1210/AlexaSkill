@@ -1,0 +1,602 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "slots": [],
+          "name": "MostrarOpcionesIntent",
+          "samples": [
+            "dime las opciones",
+            "cuáles son las opciones",
+            "qué opciones tengo",
+            "qué puedo hacer",
+            "qué puedes hacer",
+            "repíteme las opciones",
+            "dime qué puedo hacer",
+            "muéstrame las opciones",
+            "qué funciones tienes",
+            "ayúdame con las opciones",
+            "no sé qué hacer",
+            "qué me recomiendas"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "filtro_tipo",
+              "type": "FiltroTipoSlot"
+            },
+            {
+              "name": "autor",
+              "type": "AutorLibroSlot"
+            }
+          ],
+          "name": "ListarLibrosIntent",
+          "samples": [
+            "muestra los libros {filtro_tipo}",
+            "lista los libros {filtro_tipo}",
+            "qué libros están {filtro_tipo}",
+            "muestra los libros de {autor}",
+            "lista los libros de {autor}",
+            "qué libros tengo de {autor}",
+            "dime los libros que hay",
+            "cuáles son los libros disponibles",
+            "muéstrame los libros",
+            "lista los libros",
+            "lista mis libros",
+            "muéstrame mi biblioteca",
+            "qué hay en mi biblioteca",
+            "cuántos libros tengo",
+            "qué libros tengo",
+            "lista todos los libros",
+            "muestra todos mis libros",
+            "dime todos mis libros"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "titulo",
+              "type": "TituloLibroSlot"
+            }
+          ],
+          "name": "BuscarLibroIntent",
+          "samples": [
+            "busca el libro {titulo}",
+            "buscar {titulo}",
+            "encuentra {titulo}",
+            "tengo el libro {titulo}",
+            "información de {titulo}",
+            "detalles de {titulo}",
+            "dime sobre {titulo}",
+            "muéstrame información de {titulo}"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "LimpiarCacheIntent",
+          "samples": [
+            "limpiar cache",
+            "reiniciar datos",
+            "limpiar memoria",
+            "borrar cache",
+            "reiniciar biblioteca"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "SiguientePaginaIntent",
+          "samples": [
+            "siguiente",
+            "siguiente página",
+            "continuar",
+            "más libros",
+            "muestra más",
+            "sigue",
+            "continúa"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "SalirListadoIntent",
+          "samples": [
+            "salir del listado",
+            "terminar lista",
+            "no más libros",
+            "parar lista",
+            "detener lista",
+            "ya no más",
+            "suficiente libros"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "titulo",
+              "type": "TituloLibroSlot"
+            },
+            {
+              "name": "autor",
+              "type": "AutorLibroSlot"
+            },
+            {
+              "name": "tipo",
+              "type": "TipoLibroSlot"
+            }
+          ],
+          "name": "AgregarLibroIntent",
+          "samples": [
+            "quiero agregar un libro",
+            "agregar un libro",
+            "añadir libro",
+            "nuevo libro",
+            "agrega {titulo} es de {tipo}",
+            "registra el libro {titulo}",
+            "quiero agregar el libro {titulo} del autor {autor} de {tipo}",
+            "guarda el libro {titulo} de tipo {tipo}",
+            "añade el libro {titulo} del autor {autor}",
+            "agrega el libro {titulo}"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "titulo",
+              "type": "TituloLibroSlot"
+            },
+            {
+              "name": "nombre_persona",
+              "type": "AMAZON.FirstName"
+            }
+          ],
+          "name": "PrestarLibroIntent",
+          "samples": [
+            "quiero prestar un libro",
+            "prestar libro",
+            "préstame {titulo}",
+            "quiero prestar el libro {titulo}",
+            "presta el libro {titulo} a {nombre_persona}",
+            "{nombre_persona} necesita el libro {titulo}",
+            "quiero el libro {titulo} para {nombre_persona}",
+            "préstame el libro {titulo} para {nombre_persona}"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "respuesta",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "name": "RespuestaGeneralIntent",
+          "samples": [
+            "es {respuesta}",
+            "yo creo que {respuesta}",
+            "yo digo {respuesta}",
+            "mi respuesta es {respuesta}",
+            "te digo {respuesta}",
+            "el autor es {respuesta}",
+            "el tipo es {respuesta}"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "titulo",
+              "type": "TituloLibroSlot"
+            },
+            {
+              "name": "id_prestamo",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "name": "DevolverLibroIntent",
+          "samples": [
+            "devolver un libro",
+            "me devolvieron un libro",
+            "devolver préstamo {id_prestamo}",
+            "entrego el libro con ID {id_prestamo}",
+            "ya terminé el libro {titulo}",
+            "regreso el libro {titulo}",
+            "devuelvo el libro {titulo}",
+            "devolver {titulo}"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "ConsultarPrestamosIntent",
+          "samples": [
+            "qué libros tengo prestados",
+            "mis libros prestados",
+            "qué libros debo recuperar",
+            "cuáles libros están prestados",
+            "muéstrame los préstamos activos",
+            "consultar préstamos",
+            "libros que presté",
+            "qué libros presté"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "ConsultarDevueltosIntent",
+          "samples": [
+            "historial de devoluciones",
+            "libros que ya regresé",
+            "mis libros devueltos",
+            "cuáles libros devolví",
+            "qué libros he devuelto",
+            "muéstrame las devoluciones",
+            "historial devuelto",
+            "lista todas las devoluciones",
+            "muestra todo el historial"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "titulo",
+              "type": "TituloLibroSlot"
+            }
+          ],
+          "name": "EliminarLibroIntent",
+          "samples": [
+            "Elimina {titulo}",
+            "Quiero eliminar el libro {titulo}",
+            "Elimina el libro {titulo}"
+          ]
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "synonyms": [
+                  "prestado"
+                ],
+                "value": "prestados"
+              }
+            },
+            {
+              "name": {
+                "synonyms": [
+                  "disponible"
+                ],
+                "value": "disponibles"
+              }
+            },
+            {
+              "name": {
+                "value": "todos"
+              }
+            }
+          ],
+          "name": "FiltroTipoSlot"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "synonyms": [
+                  "no lo sé",
+                  "no se"
+                ],
+                "value": "no sé"
+              }
+            },
+            {
+              "name": {
+                "value": "Los juegos del hambre"
+              }
+            },
+            {
+              "name": {
+                "value": "El código Da Vinci"
+              }
+            },
+            {
+              "name": {
+                "value": "Fahrenheit 451"
+              }
+            },
+            {
+              "name": {
+                "value": "Crimen y castigo"
+              }
+            },
+            {
+              "name": {
+                "value": "El extranjero"
+              }
+            },
+            {
+              "name": {
+                "value": "La metamorfosis"
+              }
+            },
+            {
+              "name": {
+                "value": "Romeo y Julieta"
+              }
+            },
+            {
+              "name": {
+                "value": "El gran Gatsby"
+              }
+            },
+            {
+              "name": {
+                "value": "Orgullo y prejuicio"
+              }
+            },
+            {
+              "name": {
+                "value": "Hamlet"
+              }
+            },
+            {
+              "name": {
+                "value": "Rayuela"
+              }
+            },
+            {
+              "name": {
+                "value": "El señor de los anillos"
+              }
+            },
+            {
+              "name": {
+                "value": "Harry Potter"
+              }
+            },
+            {
+              "name": {
+                "value": "Cien años de soledad"
+              }
+            },
+            {
+              "name": {
+                "value": "100 años de soledad"
+              }
+            },
+            {
+              "name": {
+                "value": "1984"
+              }
+            },
+            {
+              "name": {
+                "value": "El Principito"
+              }
+            },
+            {
+              "name": {
+                "value": "Don Quijote"
+              }
+            },
+            {
+              "name": {
+                "value": "El nombre del viento"
+              }
+            }
+          ],
+          "name": "TituloLibroSlot"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "synonyms": [
+                  "no lo sé",
+                  "no se",
+                  "desconocido"
+                ],
+                "value": "no sé"
+              }
+            },
+            {
+              "name": {
+                "value": "Suzanne Collins"
+              }
+            },
+            {
+              "name": {
+                "value": "Dan Brown"
+              }
+            },
+            {
+              "name": {
+                "value": "Ray Bradbury"
+              }
+            },
+            {
+              "name": {
+                "value": "Albert Camus"
+              }
+            },
+            {
+              "name": {
+                "value": "Franz Kafka"
+              }
+            },
+            {
+              "name": {
+                "value": "F. Scott Fitzgerald"
+              }
+            },
+            {
+              "name": {
+                "value": "Jane Austen"
+              }
+            },
+            {
+              "name": {
+                "value": "William Shakespeare"
+              }
+            },
+            {
+              "name": {
+                "value": "Julio Cortázar"
+              }
+            },
+            {
+              "name": {
+                "value": "J.R.R. Tolkien"
+              }
+            },
+            {
+              "name": {
+                "value": "J.K. Rowling"
+              }
+            },
+            {
+              "name": {
+                "value": "Antoine de Saint-Exupéry"
+              }
+            },
+            {
+              "name": {
+                "value": "George Orwell"
+              }
+            },
+            {
+              "name": {
+                "value": "Miguel de Cervantes"
+              }
+            },
+            {
+              "name": {
+                "value": "Gabriel García Márquez"
+              }
+            },
+            {
+              "name": {
+                "value": "Patrick Rothfuss"
+              }
+            }
+          ],
+          "name": "AutorLibroSlot"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "synonyms": [
+                  "no lo sé",
+                  "no se"
+                ],
+                "value": "no sé"
+              }
+            },
+            {
+              "name": {
+                "value": "novela"
+              }
+            },
+            {
+              "name": {
+                "synonyms": [
+                  "Miedo",
+                  "Horror"
+                ],
+                "value": "Terror"
+              }
+            },
+            {
+              "name": {
+                "value": "Aventura"
+              }
+            },
+            {
+              "name": {
+                "value": "Poesía"
+              }
+            },
+            {
+              "name": {
+                "value": "Drama"
+              }
+            },
+            {
+              "name": {
+                "value": "No ficción"
+              }
+            },
+            {
+              "name": {
+                "value": "Ficción"
+              }
+            },
+            {
+              "name": {
+                "value": "Autoayuda"
+              }
+            },
+            {
+              "name": {
+                "value": "Técnico"
+              }
+            },
+            {
+              "name": {
+                "value": "Historia"
+              }
+            },
+            {
+              "name": {
+                "value": "Biografía"
+              }
+            },
+            {
+              "name": {
+                "value": "Misterio"
+              }
+            },
+            {
+              "name": {
+                "value": "Thriller"
+              }
+            },
+            {
+              "name": {
+                "value": "Romance"
+              }
+            },
+            {
+              "name": {
+                "value": "Ciencia ficción"
+              }
+            },
+            {
+              "name": {
+                "value": "Fantasía"
+              }
+            }
+          ],
+          "name": "TipoLibroSlot"
+        }
+      ],
+      "invocationName": "biblioteca personal"
+    }
+  }
+}

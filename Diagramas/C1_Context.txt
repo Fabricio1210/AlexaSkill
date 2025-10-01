@@ -1,0 +1,21 @@
+@startuml C4_Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title Sistema Biblioteca Personal - Diagrama de Contexto
+
+Person(usuario, "Usuario", "Lector de libros que gestiona su biblioteca personal")
+
+System(bibliotecaSkill, "Biblioteca Personal Skill", "Skill de Alexa que permite gestionar una biblioteca personal mediante comandos de voz. Aplica principios POO.")
+
+System_Ext(alexa, "Amazon Alexa", "Plataforma de procesamiento de voz que convierte comandos hablados en peticiones JSON")
+
+System_Ext(aws, "AWS Lambda", "Servicio de computación serverless que ejecuta el código del skill")
+
+Rel(usuario, alexa, "Habla comandos de voz", "Voz")
+Rel(alexa, bibliotecaSkill, "Envía peticiones JSON", "HTTPS/JSON")
+Rel(bibliotecaSkill, alexa, "Responde con JSON", "HTTPS/JSON") 
+Rel(alexa, usuario, "Reproduce respuestas", "Audio")
+
+Rel(bibliotecaSkill, aws, "Se ejecuta en", "Runtime")
+
+@enduml

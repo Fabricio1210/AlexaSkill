@@ -1,0 +1,90 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Alexa Skill Lambda Function - Diagrama de Componentes
+
+Container(ask, "Alexa Skills Kit", "ASK Runtime", "Maneja intents y slots")
+
+Container_Boundary(lambda_function, "Alexa Skill Lambda Function") {
+    Component(launch_handler, "LaunchRequestHandler", "Python Class", "Maneja el inicio del skill, proporciona mensaje de bienvenida")
+    Component(addbook_handler, "AddBookIntentHandler", "Python Class", "Procesa comandos para agregar libros, valida slots")
+    Component(resumeaddbook_handler, "ResumeAddBookIntentHandler", "Python Class", "Procesa comandos cuando el usuario responde")
+    Component(listbooks_handler, "ListBooksIntentHandler", "Python Class", "Lista los libros almacenados en la memoria")
+    Component(lendbook_handler, "LendBookIntentHandler", "Python Class", "Muestra los libro no prestados y hace el proceso del prestamo")
+    Component(search_handler, "SearchBookIntentHandler", "Python Class", "Procesa búsquedas por autor, género o título")
+    Component(help_handler, "HelpIntentHandler", "Python Class", "Proporciona ayuda y lista de comandos")
+    Component(error_handler, "CatchAllExceptionHandler", "Python Class", "Maneja errores y excepciones")
+    Component(cleancache_handler, "CleanCachenHandler", "Python Class", "Limpia los datos de la memoria cache")
+    Component(returnbook_handler, "ReturnBookHandler", "Python Class", "Maneja el retorno del libro a la bibloteca")
+    Component(getloans_handler, "GetLoansHandler", "Python Class", "Muestra los prestamos hechos por el usuario")
+    Component(getreturns_handler, "GetReturnsHandler", "Python Class", "Muestra los libros devuletos por el usuario")
+    Component(showoptions_handler, "ShowOptions", "Python Class", "Repite las opciones del menu principal para el usuario")
+    Component(nextpage_handler, "NextPage", "Python Class", "En el menu de paginacion muestra la siguiente pagina")
+    Component(getoutlist_handler, "GetOutList", "Python Class", "Termina el proceso de listar libros")
+    Component(cancelorstop_handler, "CancelOrStopList", "Python Class", "Cancelar las acciones de los intents")
+    Component(sessionendrequest_handler, "SessionEndRequestList", "Python Class", "Terminar la sesion de la skill")
+    Component(fallback_handler, "FallBack", "Python Class", "Hace el fallback de las acciones")
+    
+
+    Component(book_class, "Book", "Python Class", "Representa libros físicos/digitales")
+
+    Component(library_class, "Library", "Python Class", "Gestiona la colección de medios, encapsula lógica de negocio")
+    
+    Component(skill_builder, "SkillBuilder", "ASK SDK", "Registra handlers y configura el skill")
+}
+
+ContainerDb(memory_storage, "S3", "Python Objects", "Instancia global de Library")
+
+Rel(ask, launch_handler, "LaunchRequest", "JSON")
+Rel(ask, addbook_handler, "AddBookIntent", "JSON")
+Rel(ask, search_handler, "SearchBookIntent", "JSON")
+Rel(ask, help_handler, "HelpIntent", "JSON")
+Rel(ask, resumeaddbook_handler, "ResumeAddBookIntent", "JSON")
+Rel(ask, listbooks_handler, "ListBookIntent", "JSON")
+Rel(ask, lendbook_handler, "ListBookIntent", "JSON")
+Rel(ask, cleancache_handler, "CleanCacheIntent", "JSON")
+Rel(ask, returnbook_handler, "ReturnBookIntent", "JSON")
+Rel(ask, getloans_handler, "GetBookLoansIntent", "JSON")
+Rel(ask, getreturns_handler, "GetBookReturnsIntent", "JSON")
+Rel(ask, showoptions_handler, "ShowOptionsIntent", "JSON")
+Rel(ask, nextpage_handler, "NextPageReturnsIntent", "JSON")
+Rel(ask, getoutlist_handler, "GetOutistIntent", "JSON")
+Rel(ask, cancelorstop_handler, "CancelOrStopIntent", "JSON")
+Rel(ask, sessionendrequest_handler, "SessionEndRequestIntent", "JSON")
+Rel(ask, fallback_handler, "FallbackIntent", "JSON")
+
+Rel(addbook_handler, library_class, "add_media()", "Method call")
+Rel(listbooks_handler, library_class, "get_media()", "Method call")
+Rel(resumeaddbook_handler, library_class, "add_media()", "Method call")
+Rel(lendbook_handler, library_class, "search_by_*(), update_by_*()", "Method call")
+Rel(search_handler, library_class, "search_by_*()", "Method call")
+Rel(returnbook_handler, library_class, "update_by_*()", "Method call")
+Rel(getloans_handler, library_class, "get_media()", "Method call")
+Rel(getreturns_handler, library_class, "get_media()", "Method call")
+Rel(nextpage_handler, library_class, "get_media()", "Method call")
+Rel(getoutlist_handler, library_class, "get_media()", "Method call")
+
+Rel(library_class, book_class, "creates", "Instantiation")
+Rel(library_class, audiobook_class, "creates", "Instantiation")
+
+Rel(library_class, memory_storage, "stores objects", "Python objects")
+
+Rel(launch_handler, skill_builder, "registered in", "Configuration")
+Rel(addbook_handler, skill_builder, "registered in", "Configuration")
+Rel(resumeaddbook_handler, skill_builder, "registered in", "Configuration")
+Rel(listbooks_handler, skill_builder, "registered in", "Configuration")
+Rel(search_handler, skill_builder, "registered in", "Configuration")
+Rel(help_handler, skill_builder, "registered in", "Configuration")
+Rel(error_handler, skill_builder, "registered in", "Configuration")
+Rel(lendbook_handler, skill_builder, "registered in", "Configuration")
+Rel(cleancache_handler, skill_builder, "registered in", "Configuration")
+Rel(returnbook_handler, skill_builder, "registered in", "Configuration")
+Rel(getloans_handler, skill_builder, "registered in", "Configuration")
+Rel(getreturns_handler, skill_builder, "registered in", "Configuration")
+Rel(showoptions_handler, skill_builder, "registered in", "Configuration")
+Rel(nextpage_handler, skill_builder, "registered in", "Configuration")
+Rel(getoutlist_handler, skill_builder, "registered in", "Configuration")
+Rel(cancelorstop_handler, skill_builder, "registered in", "Configuration")
+Rel(sessionendrequest_handler, skill_builder, "registered in", "Configuration")
+Rel(fallback_handler, skill_builder, "registered in", "Configuration")
+@enduml
